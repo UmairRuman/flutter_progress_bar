@@ -22,6 +22,12 @@ class _MainLayoutState extends State<MainLayout> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    isClickedOnBar = true;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(

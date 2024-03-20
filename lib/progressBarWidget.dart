@@ -73,6 +73,9 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget>
           });
     _animation =
         Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
+    if (widget.isClickedOnbar) {
+      _animationController.forward(from: 0.0);
+    }
   }
 
   @override
@@ -81,9 +84,7 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget>
     super.dispose();
   }
 
-  void startAnimation() {
-    _animationController.forward(from: 0.0);
-  }
+  void startAnimation() {}
 
   @override
   Widget build(BuildContext context) {
