@@ -26,7 +26,8 @@ class ProgressBarWidget extends StatefulWidget {
       required this.onTap,
       required this.isClickedOnbar,
       this.duration = const Duration(seconds: 10),
-      this.shadowEffectColor = Colors.grey})
+      this.shadowEffectColor = Colors.grey,
+      this.progressValue = 100})
       : super(key: key);
   final Color shadowEffectColor;
   final Size size;
@@ -44,6 +45,7 @@ class ProgressBarWidget extends StatefulWidget {
   final VoidCallback onTap;
   final bool isClickedOnbar;
   final Duration duration;
+  final double progressValue;
 
   @override
   State<ProgressBarWidget> createState() => _ProgressBarWidgetState();
@@ -79,12 +81,19 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
   }
 
-  void startAnimation() {}
+  void startAnimation() {
+    _animationController.forward(from: 0.0);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,24 +105,24 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget>
       child: CustomPaint(
         size: widget.size,
         painter: ProgressBarPainter(
-          shadowEffectColor: widget.shadowEffectColor,
-          animation: _animation,
-          isClicked: widget.isClickedOnbar,
-          gradientColors: widget.gradientColors,
-          textFontSize: widget.textFontSize,
-          textFontStyle: widget.textFontStyle,
-          textFontWeight: widget.textFontWeight,
-          startAngle: widget.startAngle,
-          isUseGradient: widget.isUseGradient,
-          progressBarColor: widget.progressBarColor,
-          activeBorders: widget.activeBorders,
-          borderColor: widget.borderColor,
-          borderWidth: widget.borderWidth,
-          progressBarWidth: widget.progressBarWidth,
-          size: widget.size,
-          onTap: widget.onTap,
-          isClickedOnbar: widget.isClickedOnbar,
-        ),
+            shadowEffectColor: widget.shadowEffectColor,
+            animation: _animation,
+            isClicked: widget.isClickedOnbar,
+            gradientColors: widget.gradientColors,
+            textFontSize: widget.textFontSize,
+            textFontStyle: widget.textFontStyle,
+            textFontWeight: widget.textFontWeight,
+            startAngle: widget.startAngle,
+            isUseGradient: widget.isUseGradient,
+            progressBarColor: widget.progressBarColor,
+            activeBorders: widget.activeBorders,
+            borderColor: widget.borderColor,
+            borderWidth: widget.borderWidth,
+            progressBarWidth: widget.progressBarWidth,
+            size: widget.size,
+            onTap: widget.onTap,
+            isClickedOnbar: widget.isClickedOnbar,
+            progressValue: widget.progressValue),
       ),
     );
   }

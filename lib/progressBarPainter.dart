@@ -25,7 +25,8 @@ class ProgressBarPainter extends CustomPainter {
       this.progressBarWidth = 10,
       required this.onTap,
       required this.isClickedOnbar,
-      required this.shadowEffectColor});
+      required this.shadowEffectColor,
+      required this.progressValue});
   final Color shadowEffectColor;
   final Animation<double> animation;
   final bool isClicked;
@@ -43,6 +44,7 @@ class ProgressBarPainter extends CustomPainter {
   final double progressBarWidth;
   final VoidCallback onTap;
   final bool isClickedOnbar;
+  final double progressValue;
   @override
   void paint(Canvas canvas, Size size) {
     final width = size.width;
@@ -50,6 +52,8 @@ class ProgressBarPainter extends CustomPainter {
     final centerWidth = width / 2;
     final centerHeight = height / 2;
     final radius = min(width, height) / 2;
+    final double sweepAngle =
+        2 * pi * ((progressValue / 100) * animation.value);
 
     //Paint for Border of Progress Bar
 
@@ -100,12 +104,12 @@ class ProgressBarPainter extends CustomPainter {
           radius: radius,
         ),
         startAngle,
-        2 * pi * animation.value,
+        sweepAngle,
         false,
         paintForProgressBar,
       );
       //Write Text inside the progress bar
-      int text = (animation.value * 100).toInt();
+      int text = (animation.value * progressValue).toInt();
       TextSpan textSpan = TextSpan(
           text: "$text% ",
           style: TextStyle(

@@ -24,7 +24,7 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   void initState() {
     super.initState();
-    isClickedOnBar = true;
+    // isClickedOnBar = true;
   }
 
   @override
@@ -41,9 +41,11 @@ class _MainLayoutState extends State<MainLayout> {
             isClickedOnbar: isClickedOnBar,
             isUseGradient: false,
             activeBorders: true,
-            borderColor: Colors.green,
+            borderColor: Colors.yellow,
             progressBarColor: Colors.black,
             startAngle: pi,
+            progressValue: 50.0,
+            duration: Duration(seconds: 1),
           ),
         ],
       ),
