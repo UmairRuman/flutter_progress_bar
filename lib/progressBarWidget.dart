@@ -27,8 +27,10 @@ class ProgressBarWidget extends StatefulWidget {
       required this.isClickedOnbar,
       this.duration = const Duration(seconds: 10),
       this.shadowEffectColor = Colors.grey,
-      this.progressValue = 100})
+      this.progressValue = 100,
+      this.curve = Curves.linear})
       : super(key: key);
+  final Curve curve;
   final Color shadowEffectColor;
   final Size size;
   final List<MaterialColor> gradientColors;
@@ -81,11 +83,6 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget>
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
@@ -105,6 +102,7 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget>
       child: CustomPaint(
         size: widget.size,
         painter: ProgressBarPainter(
+            curve: widget.curve,
             shadowEffectColor: widget.shadowEffectColor,
             animation: _animation,
             isClicked: widget.isClickedOnbar,

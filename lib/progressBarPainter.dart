@@ -26,7 +26,9 @@ class ProgressBarPainter extends CustomPainter {
       required this.onTap,
       required this.isClickedOnbar,
       required this.shadowEffectColor,
-      required this.progressValue});
+      required this.progressValue,
+      required this.curve});
+  final Curve curve;
   final Color shadowEffectColor;
   final Animation<double> animation;
   final bool isClicked;
